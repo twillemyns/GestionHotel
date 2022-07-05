@@ -21,16 +21,18 @@ public class Menus {
     int noNuits;
 
     public void entreeClients(Connection connection) throws IOException, SQLException {
+        h.getTabPrixBDD(connection);
+        h.getTabRoomsBDD(connection);
         System.out.println("Combien de personnes dans la nouvelle chambre ?");
         nbPers = sc.nextInt();
-        h.affichCh(nbPers, c.tabPrix, c.tabDescript);
+        h.afficherChBDD(connection, nbPers);
         System.out.println("Quelle chambre souhaitez-vous?");
         noCh = sc.nextInt();
-        if (c.tabPrix[nbPers - 1][h.getObject(noCh).getCateg()-1] != 0) {
+        if (h.tabPrix[nbPers - 1][h.getObject(noCh).getCateg()-1] != 0) {
 //            System.out.println(h.getObject(noCh).getNumero());
             System.out.println("Pour combien de nuits souhaitez-vous réserver la chambre ?");
             noNuits = sc.nextInt();
-            System.out.println("Votre chambre est au prix de " + c.tabPrix[nbPers - 1][h.getObject(noCh).getCateg()-1] + "€ la nuit soit "+ c.tabPrix[nbPers - 1][h.getObject(noCh).getCateg()-1]*noNuits +"€ .");
+            System.out.println("Votre chambre est au prix de " + h.tabPrix[nbPers - 1][h.getObject(noCh).getCateg()-1] + "€ la nuit soit "+ h.tabPrix[nbPers - 1][h.getObject(noCh).getCateg()-1]*noNuits +"€ .");
             insertData.insererDonnees(connection, noCh, noNuits, nbPers);
         } else {
             System.out.println("Ce type de chambre n'est pas disponible pour ce nombre de personnes.");

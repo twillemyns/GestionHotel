@@ -9,9 +9,9 @@ import java.sql.Statement;
 
 public class InsertData {
     private static int count = 0;
+        Statement stmt = null;
     public void insererDonnees(Connection conn, int noCh, int nbNuits, int nbPersonnes) throws SQLException {
-        Statement stmt = conn.createStatement();
+        stmt = conn.createStatement();
         stmt.executeUpdate("INSERT INTO reservation VALUES ('"+nbNuits+"', '"+nbPersonnes+"', '"+noCh+"');");
-//        System.out.println(res);
     }
 }
