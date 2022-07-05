@@ -7,12 +7,12 @@ import java.sql.Statement;
 
 public class Hotel {
     private Chambre[] tabCh = new Chambre[31];
+
     public int getIndex(int noCh) {
         int index = 0;
         int i = 0;
         do {
             i++;
-//            System.out.println(tabCh[i].getNumero());
             if (noCh == tabCh[i].getNumero()) {
                 index = i;
             }
@@ -23,6 +23,7 @@ public class Hotel {
     public Chambre getObject(int noCh) {
         return tabCh[getIndex(noCh)];
     }
+
     Statement stmt = null;
 
     public void afficherChBDD(Connection conn, int nbPers) throws SQLException {
@@ -49,9 +50,10 @@ public class Hotel {
             int noCategorie = res.getInt("nocategorie");
             int prix = res.getInt("prix");
 
-            tabPrix [noPersonnes - 1][noCategorie - 1] = prix;
+            tabPrix[noPersonnes - 1][noCategorie - 1] = prix;
         }
     }
+
     public void getTabRoomsBDD(Connection conn) throws SQLException {
         int i = 0;
         stmt = conn.createStatement();
@@ -61,7 +63,7 @@ public class Hotel {
             int noCategory = res.getInt("nocategory");
             int noPers = res.getInt("nbpeople");
 
-            tabCh [i] = new Chambre(noRoom, noCategory, noPers);
+            tabCh[i] = new Chambre(noRoom, noCategory, noPers);
             i++;
         }
     }
